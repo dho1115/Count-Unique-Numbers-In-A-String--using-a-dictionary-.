@@ -18,8 +18,11 @@ dictionary: The dictionary that will be used to get the unique value count. How 
 def main():
    from random import randint as randomInteger;
    from sys import setrecursionlimit;
+   from colorama import init;
+   from termcolor import colored;
 
-   setrecursionlimit(979531); #sets the recursion limit.
+   setrecursionlimit(93579179); #sets the recursion limit.
+   init();
 
    try:
       numberLength = eval(input("Enter the length of the number string you want to find unique Numbers for: "));
@@ -27,12 +30,18 @@ def main():
 
       def uniqueNumbers(stringifiedDigits=stringifiedDigits, dictionary:dict={}):
          dictionary[stringifiedDigits[0]] = stringifiedDigits[0];
+
          if len(stringifiedDigits) == 1:
             dictionary[stringifiedDigits] = stringifiedDigits;
-            print(f"Final Dictionary Result: {dictionary}")
+            print(f"Final Dictionary Result: {dictionary}.")
             return f"There are {len(dictionary.keys())} unique numbers.";
+
+         elif len(dictionary.keys()) == 10:
+            print(f"The stringifiedDigits has ")
+            print(f"Final Dictionary Result: {dictionary}.");
+            return f"Although there was originally {colored(str(numberLength), 'light_green', attrs=['bold'])} digits inside stringifiedDigits, I did not have to go through all of them.\nInstead, I stopped at {colored(len(stringifiedDigits), 'red', attrs=['bold'])} b/c the maximum number of unique digits has been reached which is 10."; #This elif condition will prematurely TERMINATE the recursion if all 10 unique numbers are found. I put this condition in to (hopefully) save some time.
       
-         if ("" in dictionary) and (len(dictionary.keys()) == 0):
+         elif ("" in dictionary) and (len(dictionary.keys()) == 0):
             return "There are 0 unique numbers.";
       
          return uniqueNumbers(stringifiedDigits[1::]);
