@@ -1,3 +1,4 @@
+#YouTube Link: https://youtu.be/R2WnT2rVhqM.
 '''
 Ths program starts by asking the user to enter the LENGTH of a number string. So, for instance... if the user enters 3 for numberLength (see below), the number generated (using randomInteger) may be 123, 344, 771, etc....
 
@@ -25,13 +26,13 @@ def main():
    init();
 
    try:
-      numberLength = eval(input("Enter the length of the number string you want to find unique Numbers for: ")); #THIS is what is taking so long. The greater the length of the number string, the longer it takes Python to create those numbers.
+      numberLength = eval(input("Enter the length of the number string you want to find unique Numbers for: ")); #THIS is what is taking so long. The greater the length of the number string, the longer it takes Python to create those numbers. I solved this problem (lag time problem) with the for loop (below).
 
       dictTemplate:dict = {};
       stringifiedDigits = "";
 
       def AddKeysToTemplate(integer):
-         dictTemplate[str(integer)] = integer;
+         dictTemplate[str(integer)] = integer; #Adds a unique key to the template (which would be useful later when we check for unique numbers).
          return str(integer);
 
       '''
@@ -45,11 +46,14 @@ def main():
       That will take up space, time and other stuff.
       '''
       for i in range(numberLength): #time saving step. 
-         stringifiedDigits+=AddKeysToTemplate(randomInteger(0,9));
+         stringifiedDigits+=AddKeysToTemplate(randomInteger(0,9)); #adds number to stringified digits.
+
          if len(dictTemplate.keys()) > 9:
-            print(f"Even though the user entered {numberLength} as the desired length, we were able to fill all 10 unique numbers using {len(stringifiedDigits)} numbers for efficiency and speed.")
+            print(f"Even though the user entered {colored(numberLength, 'red', attrs=['bold'])} as the desired length, we were able to fill all 10 unique numbers using ONLY {colored(len(stringifiedDigits), 'light_green', attrs=['bold'])} generated numbers for efficiency and speed.")
             break; #THIS!!! This for loop with the break literally speeds up the process if the user enters like a GAZILLION for numberLength.
       
+      #Below is the RECURSION function.
+
       def uniqueNumbers(stringifiedDigits=stringifiedDigits, dictionary:dict={}):
          dictionary[stringifiedDigits[0]] = stringifiedDigits[0];
 
@@ -57,11 +61,6 @@ def main():
             dictionary[stringifiedDigits] = stringifiedDigits;
             print(f"Final Dictionary Result: {dictionary}.")
             return f"There are {len(dictionary.keys())} unique numbers.";
-
-         elif len(dictionary.keys()) == 10:
-            print(f"The stringifiedDigits has ")
-            print(f"Final Dictionary Result: {dictionary}.");
-            return f"Although there was originally {colored(str(numberLength), 'light_green', attrs=['bold'])} digits inside stringifiedDigits, I did not have to go through all of them.\nInstead, I only spliced out {colored(str((numberLength - len(stringifiedDigits))+1), 'red', attrs=['bold'])} digits b/c the maximum number of unique digits has been reached which is 10."; #This elif condition will prematurely TERMINATE the recursion if all 10 unique numbers are found. I put this condition in to (hopefully) save some time.
       
          elif ("" in dictionary) and (len(dictionary.keys()) == 0):
             return "There are 0 unique numbers.";

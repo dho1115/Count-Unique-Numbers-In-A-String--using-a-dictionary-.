@@ -1,3 +1,4 @@
+#YouTube link: https://youtu.be/R2WnT2rVhqM
 '''
 Ths program starts by asking the user to enter the LENGTH of a number string. So, for instance... if the user enters 3 for numberLength (see below), the number generated (using randomInteger) may be 123, 344, 771, etc....
 
