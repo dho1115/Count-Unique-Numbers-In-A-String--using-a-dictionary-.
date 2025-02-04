@@ -24,8 +24,6 @@ def main():
 
       uniqueNumberCount = lambda stringifiedDigits=stringifiedDigits: len(dict.fromkeys(",".join(stringifiedDigits).split(","), 0))
 
-      print(uniqueNumberCount())
-
    except ValueError as ve:
       print(f"ValueError: {ve.args[0]} for {ve.args[1]}.");
 
