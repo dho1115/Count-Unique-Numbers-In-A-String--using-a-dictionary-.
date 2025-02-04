@@ -25,7 +25,7 @@ def main():
    init();
 
    try:
-      numberLength = eval(input("Enter the length of the number string you want to find unique Numbers for: "));
+      numberLength = eval(input("Enter the length of the number string you want to find unique Numbers for: ")); #THIS is what is taking so long. The greater the length of the number string, the longer it takes Python to create those numbers.
       stringifiedDigits = "".join([str(randomInteger(0, 9)) for i in range(numberLength)]);
 
       def uniqueNumbers(stringifiedDigits=stringifiedDigits, dictionary:dict={}):
@@ -39,7 +39,7 @@ def main():
          elif len(dictionary.keys()) == 10:
             print(f"The stringifiedDigits has ")
             print(f"Final Dictionary Result: {dictionary}.");
-            return f"Although there was originally {colored(str(numberLength), 'light_green', attrs=['bold'])} digits inside stringifiedDigits, I did not have to go through all of them.\nInstead, I stopped at {colored(len(stringifiedDigits), 'red', attrs=['bold'])} b/c the maximum number of unique digits has been reached which is 10."; #This elif condition will prematurely TERMINATE the recursion if all 10 unique numbers are found. I put this condition in to (hopefully) save some time.
+            return f"Although there was originally {colored(str(numberLength), 'light_green', attrs=['bold'])} digits inside stringifiedDigits, I did not have to go through all of them.\nInstead, I only spliced out {colored(str((numberLength - len(stringifiedDigits))+1), 'red', attrs=['bold'])} digits b/c the maximum number of unique digits has been reached which is 10."; #This elif condition will prematurely TERMINATE the recursion if all 10 unique numbers are found. I put this condition in to (hopefully) save some time.
       
          elif ("" in dictionary) and (len(dictionary.keys()) == 0):
             return "There are 0 unique numbers.";
