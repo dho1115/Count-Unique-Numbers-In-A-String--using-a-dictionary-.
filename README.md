@@ -10,3 +10,6 @@ See the new comments inside ''' [comment] '''!!!
 
 UPDATE!!!
 Renamed file to recursion.py.
+
+UPDATE!!!
+I can do this using fromkeys as well.
