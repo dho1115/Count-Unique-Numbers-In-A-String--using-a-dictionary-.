@@ -26,8 +26,30 @@ def main():
 
    try:
       numberLength = eval(input("Enter the length of the number string you want to find unique Numbers for: ")); #THIS is what is taking so long. The greater the length of the number string, the longer it takes Python to create those numbers.
-      stringifiedDigits = "".join([str(randomInteger(0, 9)) for i in range(numberLength)]);
 
+      dictTemplate:dict = {};
+      stringifiedDigits = "";
+
+      def AddKeysToTemplate(integer):
+         dictTemplate[str(integer)] = integer;
+         return str(integer);
+
+      '''
+      "For Loop" middleware/middle step:
+      The bottom for loop "cuts" the randomInteger generating process if the user enters a super large number.
+
+      The bottom for loop will STOP if all 10 unique numbers are found, regardless if the length of strigifiedDigits == numberLength, which was the length the user inputted!!!
+
+      So, for example, if the user enters 93919953 but Python 10 unique numbers (0-9) are generated at, say, the 37th number (len(stringifiedDigits) == 37), then what is the point of going past the 37th number? 
+
+      That will take up space, time and other stuff.
+      '''
+      for i in range(numberLength): #time saving step. 
+         stringifiedDigits+=AddKeysToTemplate(randomInteger(0,9));
+         if len(dictTemplate.keys()) > 9:
+            print(f"Even though the user entered {numberLength} as the desired length, we were able to fill all 10 unique numbers using {len(stringifiedDigits)} numbers for efficiency and speed.")
+            break; #THIS!!! This for loop with the break literally speeds up the process if the user enters like a GAZILLION for numberLength.
+      
       def uniqueNumbers(stringifiedDigits=stringifiedDigits, dictionary:dict={}):
          dictionary[stringifiedDigits[0]] = stringifiedDigits[0];
 
@@ -53,6 +75,9 @@ def main():
 
    except SyntaxError as stx:
       print(f"SyntaxError: {stx.args[0]} for {stx.args[1]}.");
+   
+   except IndexError as idx:
+      print(f"Index out of range error!!! {idx.args[0]} for {idx.args[1]}!!!")
 
    except Exception as exc:
       print(f"Exception occurred: {exc.args[0]} for {exc.args[1]}.")
