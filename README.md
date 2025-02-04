@@ -24,3 +24,7 @@ for i in range(numberLength): #time saving step.
             break;
 
 The above for-loop "short circuits" the random number generating process if 10 unique digits (the max) has been reached. I tried a dictionary comprehension, but it does not work as well.
+
+UPDATE:
+The YouTube link: https://youtu.be/R2WnT2rVhqM
+
